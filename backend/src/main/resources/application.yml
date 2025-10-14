@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/wealth_tracker
+    username: postgres
+    password:
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update # creates tables automatically based on models
+    show-sql: true # shows SQL in the console
+    properties:
+      hibernate:
+        format_sql: true
