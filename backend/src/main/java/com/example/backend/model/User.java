@@ -2,6 +2,7 @@ package com.example.backend.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
 
 // Marks this class as a database entity (table)
 @Entity  
@@ -25,4 +26,12 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String email;
+
+    // A user can have many categories
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Category> categories;
+
+    // A user can have many transactions
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Transaction> transactions;
 }
