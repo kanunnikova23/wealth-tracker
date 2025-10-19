@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.backend.service.CategoryService;
 import com.example.backend.model.Category;
 import org.springframework.web.bind.annotation.*;
+import com.example.backend.dto.CategoryDTO;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,8 +27,8 @@ public class CategoryController {
 
     // Endpoint to create a new category
     @PostMapping
-    public Category createCategory(@RequestBody Category category) {
-        return categoryService.create(category);
+    public Category createCategory(@RequestBody @Valid CategoryDTO categoryDTO) {
+        return categoryService.create(categoryDTO);
     }
 
     // Endpoint to retrieve a category by ID

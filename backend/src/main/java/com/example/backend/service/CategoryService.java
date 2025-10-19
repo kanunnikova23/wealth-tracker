@@ -5,14 +5,18 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import com.example.backend.repository.CategoryRepository;
 import com.example.backend.model.Category;
+import com.example.backend.dto.CategoryDTO;
+import com.example.backend.model.User;
 
 @Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;
+    private final UserService userService;
 
     // Constructor for CategoryService with dependency injection
-    public CategoryService(CategoryRepository categoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository, UserService userService) {
         this.categoryRepository = categoryRepository;
+        this.userService = userService;
     }
 
     // Retrieves all categories from the database
@@ -21,7 +25,16 @@ public class CategoryService {
     }
 
     // Creates a new category in the database
-    public Category create(Category category) {
+    public Category create(CategoryDTO categoryDTO) {
+        User user = userService.getById(categoryDTO.getUserId());
+
+        Category category = new Category();
+        category.setName(categoryDTO.getName());
+        category.setType(categoryDTO.getType());
+        category.setDescription(categoryDTO.getDescription());
+        // Set the associated user
+        category.setUser(user);
+        
         return categoryRepository.save(category);
     }
 
