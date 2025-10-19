@@ -5,6 +5,12 @@ spring:
     password:
     driver-class-name: org.postgresql.Driver
 
+springdoc:
+  api-docs:
+    path: /api-docs # default /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html # optional alias
+
   jpa:
     hibernate:
       ddl-auto: update # creates tables automatically based on models
