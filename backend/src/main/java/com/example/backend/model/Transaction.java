@@ -3,6 +3,7 @@ import java.time.LocalDate; // import the LocalDate class
 
 import jakarta.persistence.*;
 import lombok.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Data
@@ -13,10 +14,16 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Amount is required")
+    @Positive(message = "Amount must be greater than zero")
     private Double amount;
+
     private String description;
+
+    @NotNull(message = "Date is required")
     private LocalDate date;
 
+    @NotNull(message = "Type is required")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TransactionType type;

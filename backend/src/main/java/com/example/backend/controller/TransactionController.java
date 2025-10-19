@@ -1,9 +1,12 @@
 package com.example.backend.controller;
 
 import com.example.backend.service.TransactionService;
+
+import jakarta.validation.Valid;
+
+import com.example.backend.dto.TransactionDTO;
 import com.example.backend.model.Transaction;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -23,8 +26,8 @@ public class TransactionController {
         return transactionService.getAllTransactions();
     }
     @PostMapping
-    public Transaction createTransaction(@RequestBody Transaction transaction) {
-        return transactionService.createTransaction(transaction);
+    public Transaction createTransaction(@RequestBody @Valid TransactionDTO dto) {
+        return transactionService.createTransaction(dto);
     }
     @GetMapping("/{id}")
     public Transaction getTransactionById(@PathVariable Long id) {
@@ -34,16 +37,8 @@ public class TransactionController {
     public void deleteTransaction(@PathVariable Long id) {
         transactionService.deleteTransaction(id);
     }
-
     @PutMapping("/{id}")
-    public Transaction updateTransaction(@PathVariable Long id, @RequestBody Transaction transaction) {
+    public Transaction updateTransaction(@PathVariable Long id, @RequestBody TransactionDTO transaction) {
         return transactionService.updateTransaction(id, transaction);
-    }
-
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    class ResourceNotFoundException extends RuntimeException {
-        public ResourceNotFoundException(String message) {
-            super(message);
-        }
     }
 }
