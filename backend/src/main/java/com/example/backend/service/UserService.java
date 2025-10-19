@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import com.example.backend.model.User;
 import com.example.backend.repository.UserRepository;
 import java.util.List;
+import com.example.backend.dto.UserDTO;
+
 
 // Marks this class as a service component (business logic layer)
 @Service
@@ -21,7 +23,10 @@ public class UserService {
     }
 
     // Creates a new user in the database
-    public User create(User user) {
+    public User createUser(UserDTO dto) {
+        User user = new User();
+        user.setName(dto.getName());
+        user.setEmail(dto.getEmail());
         return userRepository.save(user);
     }
 

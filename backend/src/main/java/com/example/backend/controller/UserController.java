@@ -1,9 +1,11 @@
 package com.example.backend.controller;
 
+import com.example.backend.dto.UserDTO;
 import com.example.backend.model.User;
 import com.example.backend.service.UserService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import jakarta.validation.Valid;
 
 // Marks this class as a REST controller (returns JSON responses)
 @RestController
@@ -28,8 +30,8 @@ public class UserController {
 
     // Endpoint to create a new user
     @PostMapping
-    public User create(@RequestBody User user) {
-        return userService.create(user);
+    public User create(@RequestBody @Valid UserDTO user) {
+        return userService.createUser(user);
     }
 
     // Endpoint to retrieve a user by ID
