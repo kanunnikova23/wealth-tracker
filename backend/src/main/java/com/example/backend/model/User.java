@@ -35,6 +35,16 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    // Password field, will be stored hashed
+    @NotBlank(message = "Password is required")
+    @Column(nullable = false)
+    private String password;
+
+    // User role: USER or ADMIN
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role = Role.USER;
+
     // A user can have many categories
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Schema(hidden = true)
