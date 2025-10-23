@@ -43,3 +43,6 @@ tmp/
 .vscode/
 *.swp
 *.ctxt
+backend/src/main/resources/application.properties
+src/main/resources/application.yml
+backend/.gitignore
