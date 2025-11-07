@@ -1,3 +1,4 @@
+// logic for generating and validating JWT tokens
 package com.example.backend.security;
 
 import io.jsonwebtoken.Claims;
